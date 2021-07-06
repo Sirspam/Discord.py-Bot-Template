@@ -10,15 +10,16 @@ from discord.ext import commands
 logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 
 load_dotenv(getcwd()+"/.env")
-default_prefix = getenv("DEFAULT_PREFIX")
+DEFAULT_PREFIX = getenv("DEFAULT_PREFIX")
 
 
-bot = commands.Bot(command_prefix=default_prefix, intents=Intents.default(), case_insensitive=True, allowed_mentions=AllowedMentions(replied_user=False))
+bot = commands.Bot(command_prefix=DEFAULT_PREFIX, intents=Intents.default(), case_insensitive=True, allowed_mentions=AllowedMentions(replied_user=False))
 
 
 initial_cogs = [
     "jishaku",
-    "cogs.error_handler"
+    "cogs.error_handler",
+    "cogs.general"
 ]
 
 for cog in initial_cogs:
@@ -35,7 +36,7 @@ async def on_ready():
 
 @bot.before_invoke
 async def before_invoke(ctx):
-    logging.info(f"Invoked {ctx.command} in {ctx.guild.name} by {ctx.author.name}\nArgs: {ctx.args}" )
+    logging.info(f"Invoked {ctx.command} in {ctx.guild.name} by {ctx.author.name}\nArgs: {ctx.args}")
 
 @bot.after_invoke
 async def after_invoke(ctx):
