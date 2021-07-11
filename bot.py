@@ -13,8 +13,16 @@ load_dotenv(getcwd()+"/.env")
 DEFAULT_PREFIX = getenv("DEFAULT_PREFIX")
 
 
-bot = commands.Bot(command_prefix=DEFAULT_PREFIX, intents=Intents.default(), case_insensitive=True, allowed_mentions=AllowedMentions(replied_user=False))
-
+bot = commands.Bot(
+    command_prefix=DEFAULT_PREFIX, 
+    intents=Intents.default(), 
+    case_insensitive=True, 
+    allowed_mentions=AllowedMentions(
+        everyone=False,
+        roles=False,
+        replied_user=False
+    )
+)
 
 initial_cogs = [
     "jishaku",
